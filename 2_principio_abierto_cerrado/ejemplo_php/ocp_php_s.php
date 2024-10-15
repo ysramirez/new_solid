@@ -11,7 +11,7 @@ abstract class Notification
 
     public function getMessage()
     {
-        return $message;
+        return $this->message;
     }
 }
 
@@ -71,7 +71,7 @@ class MailServerNotificator implements Notifier
 {
     public function send($notification)
     {
-        //
+        echo "Sending email from " . $notification->getFrom() . " to " . $notification->getTo() . ": " . $notification->getMessage() . "\n";
     }
 }
 
@@ -79,7 +79,7 @@ class SmsServerNotificator implements Notifier
 {
     public function send($notification)
     {
-        //
+        echo "Sending SMS to " . $notification->getToMobileNumber() . ": " . $notification->getMessage() . "\n";
     }
 }
 
@@ -89,6 +89,6 @@ $smsNotification = new SmsNotification('Remember the clock', '654879357');
 $mailServerNotificator = new MailServerNotificator();
 $smsServerNotificator = new SmsServerNotificator();
 
-$$mailServerNotificator->send($emailNotification);
+$mailServerNotificator->send($emailNotification);
 $smsServerNotificator->send($smsNotification);
 
