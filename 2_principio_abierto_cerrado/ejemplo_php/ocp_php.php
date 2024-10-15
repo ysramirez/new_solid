@@ -36,6 +36,10 @@ class Notificator
                 echo "Error: Missing SMS parameters.\n";
             }
         } 
+
+        if ($type == 'file') {
+            ///
+        } 
     }
 }
 
@@ -45,3 +49,4 @@ $smsNotification = new Notification('Remember the clock', null, null, null, '654
 $notificator = new Notificator();
 $notificator->sendNotification('email', $emailNotification);
 $notificator->sendNotification('sms', $smsNotification);
+$notificator->sendNotification('file', $smsNotification);
