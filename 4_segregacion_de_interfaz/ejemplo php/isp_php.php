@@ -12,24 +12,24 @@ class ClienteRegular implements OperacionesBancarias {
 
     public function depositar($monto) {
         $this->saldo += $monto;
-        echo "Depósito realizado. Saldo actual: $" . $this->saldo . "<br>";
+        echo "Depósito realizado. Saldo actual: $" . $this->saldo . "\n";
     }
 
     public function retirar($monto) {
         if ($this->saldo >= $monto) {
             $this->saldo -= $monto;
-            echo "Retiro realizado. Saldo actual: $" . $this->saldo . "<br>";
+            echo "Retiro realizado. Saldo actual: $" . $this->saldo . "\n";
         } else {
-            echo "Fondos insuficientes.<br>";
+            echo "Fondos insuficientes.\n";
         }
     }
 
     public function consultarSaldo() {
-        echo "El saldo es: $" . $this->saldo . "<br>";
+        echo "El saldo es: $" . $this->saldo . "\n";
     }
 
     public function concederPrestamo($monto) {        
-        echo "Un cliente regular no puede conceder préstamos.<br>";
+        echo "Un cliente regular no puede conceder préstamos.\n";
     }
 }
 
@@ -38,24 +38,24 @@ class GerenteBanco implements OperacionesBancarias {
 
     public function depositar($monto) {
         $this->saldo += $monto;
-        echo "Depósito realizado por el gerente. Saldo actual: $" . $this->saldo . "<br>";
+        echo "Depósito realizado por el gerente. Saldo actual: $" . $this->saldo . "\n";
     }
 
     public function retirar($monto) {
         if ($this->saldo >= $monto) {
             $this->saldo -= $monto;
-            echo "Retiro realizado por el gerente. Saldo actual: $" . $this->saldo . "<br>";
+            echo "Retiro realizado por el gerente. Saldo actual: $" . $this->saldo . "\n";
         } else {
-            echo "Fondos insuficientes.<br>";
+            echo "Fondos insuficientes.\n";
         }
     }
 
     public function consultarSaldo() {
-        echo "El saldo del gerente es: $" . $this->saldo . "<br>";
+        echo "El saldo del gerente es: $" . $this->saldo . "\n";
     }
 
     public function concederPrestamo($monto) {
-        echo "El gerente ha concedido un préstamo de $" . $monto . "<br>";
+        echo "El gerente ha concedido un préstamo de $" . $monto . "\n";
     }
 }
 
