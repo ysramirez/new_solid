@@ -1,68 +1,69 @@
 <?php
 
-interface BasicOperations {
-    public function deposit($amount);
-    public function withdraw($amount);
-    public function checkBalance();
+interface OperacionesBancarias {
+    public function depositar($monto);
+    public function retirar($monto);
+    public function consultarSaldo();
+    public function concederPrestamo($monto);
 }
 
-interface Loans {
-    public function grantLoan($amount);
-}
+class ClienteRegular implements OperacionesBancarias {
+    private $saldo = 1000;
 
-class RegularClient implements BasicOperations {
-    private $balance = 1000;
-
-    public function deposit($amount) {
-        $this->balance += $amount;
-        echo "Deposit made. Current balance: $" . $this->balance . PHP_EOL;
+    public function depositar($monto) {
+        $this->saldo += $monto;
+        echo "Depósito realizado. Saldo actual: $" . $this->saldo . "<br>";
     }
 
-    public function withdraw($amount) {
-        if ($this->balance >= $amount) {
-            $this->balance -= $amount;
-            echo "Withdrawal made. Current balance: $" . $this->balance . PHP_EOL;
+    public function retirar($monto) {
+        if ($this->saldo >= $monto) {
+            $this->saldo -= $monto;
+            echo "Retiro realizado. Saldo actual: $" . $this->saldo . "<br>";
         } else {
-            echo "Insufficient funds." . PHP_EOL;
+            echo "Fondos insuficientes.<br>";
         }
     }
 
-    public function checkBalance() {
-        echo "The balance is: $" . $this->balance . PHP_EOL;
+    public function consultarSaldo() {
+        echo "El saldo es: $" . $this->saldo . "<br>";
+    }
+
+    public function concederPrestamo($monto) {        
+        echo "Un cliente regular no puede conceder préstamos.<br>";
     }
 }
 
-class BankManager implements BasicOperations, Loans {
-    private $balance = 50000;
+class GerenteBanco implements OperacionesBancarias {
+    private $saldo = 50000;
 
-    public function deposit($amount) {
-        $this->balance += $amount;
-        echo "Deposit made by the manager. Current balance: $" . $this->balance . PHP_EOL;
+    public function depositar($monto) {
+        $this->saldo += $monto;
+        echo "Depósito realizado por el gerente. Saldo actual: $" . $this->saldo . "<br>";
     }
 
-    public function withdraw($amount) {
-        if ($this->balance >= $amount) {
-            $this->balance -= $amount;
-            echo "Withdrawal made by the manager. Current balance: $" . $this->balance . PHP_EOL;
+    public function retirar($monto) {
+        if ($this->saldo >= $monto) {
+            $this->saldo -= $monto;
+            echo "Retiro realizado por el gerente. Saldo actual: $" . $this->saldo . "<br>";
         } else {
-            echo "Insufficient funds." . PHP_EOL;
+            echo "Fondos insuficientes.<br>";
         }
     }
 
-    public function checkBalance() {
-        echo "The manager's balance is: $" . $this->balance . PHP_EOL;
+    public function consultarSaldo() {
+        echo "El saldo del gerente es: $" . $this->saldo . "<br>";
     }
 
-    public function grantLoan($amount) {
-        echo "The manager has granted a loan of $" . $amount . PHP_EOL;
+    public function concederPrestamo($monto) {
+        echo "El gerente ha concedido un préstamo de $" . $monto . "<br>";
     }
 }
 
-$client = new RegularClient();
-$client->deposit(500);
-$client->withdraw(200);
-$client->checkBalance();
+$cliente = new ClienteRegular();
+$cliente->depositar(500);
+$cliente->retirar(200);
+$cliente->concederPrestamo(1000); // Método innecesario
 
-$manager = new BankManager();
-$manager->grantLoan(10000);
-$manager->checkBalance();
+$gerente = new GerenteBanco();
+$gerente->concederPrestamo(10000);
+$gerente->consultarSaldo();
